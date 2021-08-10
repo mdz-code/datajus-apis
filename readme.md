@@ -101,7 +101,7 @@ Para melhor compreensão de nossos serviços web privados, separamos nosso desen
 
     const uuidContractExample = '68e5ea80-a2b0-434f-b8eb-62e521f6a4cb'
     const dataObject = {
-        contractId: uuidAssinadorExample,
+        contractId: uuidContractExample,
     }
 
     const response = axios({
@@ -118,7 +118,7 @@ Para melhor compreensão de nossos serviços web privados, separamos nosso desen
 
     const uuidContractExample = '68e5ea80-a2b0-434f-b8eb-62e521f6a4cb'
     const dataObject = {
-        contractId: uuidAssinadorExample,
+        contractId: uuidContractExample,
         reciver: 'lameranha@gmail.com',
         type: 'email'
     }
@@ -129,5 +129,3 @@ Para melhor compreensão de nossos serviços web privados, separamos nosso desen
         data: dataObject
     })
     ```
-    
-

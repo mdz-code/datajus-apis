@@ -1,7 +1,6 @@
-- name: Deploy an App Engine
+- name: Deploy to App Engine
+  uses: google-github-actions/deploy-appengine@v0.4.0
 
-  id: deploy-app
-  uses: google-github-actions/deploy-appengine@v0.1.0
   with:
     project: ${{ secrets.gcp_project }}
     deliverables: ../../app.yaml

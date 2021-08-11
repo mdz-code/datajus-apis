@@ -1,9 +1,0 @@
-- name: Deploy App Engine
-  uses: google-github-actions/setup-gcloud@v0.2.0
-  with:
-    project_id: ${{ env.PROJECT_ID }}
-    service_account_key: ${{ secrets.gcp_credentials }}
-
-- name: Deploy to App Engine
-  run: gcloud app deploy app.yaml --quiet --no-promote --version v1
-

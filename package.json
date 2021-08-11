@@ -6,7 +6,7 @@
   "author": "Larissa Kamers <lbkamers@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index"
+    "start": "node src/app"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.21.0",

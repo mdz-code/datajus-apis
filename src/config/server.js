@@ -14,6 +14,6 @@ module.exports = class Server {
 
     startServer() {
         this.routes()
-        this.app.listen(5000, () => console.log("🥽 server online"))
+        this.app.listen(process.env.PORT || 5000, () => console.log("🥽 server online"))
     }
 }

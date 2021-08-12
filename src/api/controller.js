@@ -1,11 +1,14 @@
 const router = require('express').Router()
+const TemplateServices = require('../services/templates')
+const ContractServices = require('../services/contract')
 
-router.get('/um', (req, res) => {
-    res.json({'get': true})
-})
+const templateServices = new TemplateServices()
+const contractServices = new ContractServices()
 
-router.get('/dois', (req, res) => {
-    res.json({'post': true})
-})
+
+router.post('/createDocument', async (req, res) => await templateServices.handlingRequest(req, res))
+
+router.get('/getDocument/:uid', async (req, res) => await contractServices.handlingRequest(req, res))
+
 
 module.exports = router

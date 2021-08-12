@@ -10,9 +10,15 @@ module.exports = class Server {
 
     routes() {
         this.app.use(router)
+        
+    }
+
+    middlewares() {
+        this.app.use(express.json())
     }
 
     startServer() {
+        this.middlewares()
         this.routes()
         this.app.listen(process.env.PORT || 5000, () => console.log("🥽 server online"))
     }

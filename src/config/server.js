@@ -1,5 +1,6 @@
 const express = require('express')
 const router = require('../api/controller')
+const cors = require('cors')
 
 module.exports = class Server {
     app
@@ -15,6 +16,7 @@ module.exports = class Server {
 
     middlewares() {
         this.app.use(express.json())
+        this.app.use(cors())
     }
 
     startServer() {

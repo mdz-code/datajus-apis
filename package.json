@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.21.0",
+    "bin-wkhtmltopdf": "^1.0.7",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "ejs": "^3.1.6",

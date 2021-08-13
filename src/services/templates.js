@@ -43,9 +43,9 @@ class TemplateServices {
         return templateHtml
     }
 
-    async createPDF(html, options={}) {
+    async createPDF(html) {
         return new Promise(((resolve, reject) => {
-            pdf.create(html, options).toBuffer((err, buffer) => {
+            pdf.create(html).toBuffer((err, buffer) => {
                 if (err !== null) {reject(err)}
                 else {resolve(buffer)}
             })

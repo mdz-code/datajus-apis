@@ -1,23 +1,36 @@
-const queryBuilder = require('../models/supabase')
+const supabase = require('../models/supabase')
 const ejs = require('ejs')
 const pdf = require('html-pdf')
 
 
 class TemplateServices {
+    supabase
+
+    constructor() {
+        this.supabase = supabase
+    }
 
     async handlingRequest(req, res) {
         const { uid: onBoardingId, customObject } = req.body
+        const { id: contractId} = await this.createDocument(onBoardingId, customObject)
 
-        const documentDelivery = await this.createDocument(onBoardingId, customObject)
-        
-        res.contentType("application/pdf")
-        res.send(documentDelivery)
+        res.send({ contractId })
     }
 
     async createDocument(onBoardingId, customObject) {
-        const templateHtml = await this.getTemplateByOnBoarding(onBoardingId)
-        const htmlRender = await this.renderByHtmlTemplate(templateHtml, customObject)
-        return await this.createPDF(htmlRender)
+        return await this.templateToContract(onBoardingId, customObject)
+    }
+
+    async templateToContract(onBoardingId, customObject) {
+        const { template_id: templateId } = await this.supabase.queryBuilder('on_boarding', 'id', onBoardingId)
+        const { document_id: documentId } = await this.supabase.queryBuilder('document_templates', 'id', templateId)
+
+        const arrayInset = [{
+            document_id: documentId,
+            custom_json: customObject
+        }]
+
+        return await this.supabase.insertValue('contracts', arrayInset)
     }
 
     async renderByHtmlTemplate(templateHtml, customObject) {
@@ -25,8 +38,8 @@ class TemplateServices {
     }
 
     async getTemplateByOnBoarding(onBoardingId) {
-        const { template_id: templateId } = await queryBuilder('on_boarding', 'id', onBoardingId, ['template_id'])
-        const { body_html: templateHtml} = await queryBuilder('document_templates', 'id', templateId)
+        const { template_id: templateId } = await this.supabase.queryBuilder('on_boarding', 'id', onBoardingId, ['template_id'])
+        const { body_html: templateHtml} = await this.supabase.queryBuilder('document_templates', 'id', templateId)
         return templateHtml
     }
 

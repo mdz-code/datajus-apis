@@ -1,6 +1,7 @@
 const supabase = require('../models/supabase')
 const ejs = require('ejs')
-const pdf = require('html-pdf')
+const html_to_pdf = require('html-pdf-node');
+
 
 
 class TemplateServices {
@@ -43,12 +44,11 @@ class TemplateServices {
         return templateHtml
     }
 
-    async createPDF(html, res) {
-        pdf.create(html).toBuffer((err, buffer) => {
-            if (err) return res.send(err)
-            res.type('pdf')
-            res.end(buffer, 'binary')
-        })
+    async createPDF(html) {
+        const file = { content: html }
+        const options = { format: 'A4' }
+
+        return await html_to_pdf.generatePdf(file, options)
 
     }
 }

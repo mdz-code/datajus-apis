@@ -13,9 +13,9 @@ class ContractServices {
 
     async handlingRequest(req, res) {
         const { uid: contractId } = req.params
-        const fileBytes = await this.renderContract(contractId, res)
         res.contentType("application/pdf")
-        res.send(fileBytes)
+        return await this.renderContract(contractId).then( buffer => res.send(buffer))
+
     }
 
     async renderContract(contractId) {        

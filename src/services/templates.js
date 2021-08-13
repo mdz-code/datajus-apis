@@ -43,15 +43,14 @@ class TemplateServices {
         return templateHtml
     }
 
-    async createPDF(html) {
-        return new Promise(((resolve, reject) => {
-            pdf.create(html).toBuffer((err, buffer) => {
-                if (err !== null) {reject(err)}
-                else {resolve(buffer)}
-            })
-        }))
-    }
+    async createPDF(html, res) {
+        pdf.create(html).toBuffer((err, buffer) => {
+            if (err) return res.send(err)
+            res.type('pdf')
+            res.end(buffer, 'binary')
+        })
 
+    }
 }
 
 module.exports = TemplateServices

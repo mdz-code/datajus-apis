@@ -31,12 +31,13 @@ class OnBoarding {
     }
 
     async getFormInfos(onBoardingId) {
-        const { action, template_id: templateId, title, subtitle } = await supabase.queryBuilder('on_boarding', 'id', onBoardingId, ['template_id', 'action', 'title', 'subtitle'], 1)
+        const { id: uid, action, template_id: templateId, title, subtitle } = await supabase.queryBuilder('on_boarding', 'id', onBoardingId, ['id', 'template_id', 'action', 'title', 'subtitle'], 1)
         
         const formEndpoint = this.endpointObjects[action]
 
         const infos = {
             type: action,
+            onBoardingId: uid,
             api: {
                 endpoint: formEndpoint
             },

@@ -16,4 +16,4 @@ router.get('/getForm/:uid', async (req, res) => await onBoarding.handlingRequest
 router.post('/auth', async (req, res) => await signers.handlingRequest(req, res))
 
 
-module.exports = router
+module.exports = router 

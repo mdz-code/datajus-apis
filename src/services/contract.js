@@ -13,8 +13,10 @@ class ContractServices {
 
     async handlingRequest(req, res) {
         const { uid: contractId } = req.params
-        res.contentType("application/pdf")
-        return await this.renderContract(contractId).then( buffer => res.send(buffer))
+        // res.contentType("application/pdf")
+        const objectPdf = await this.renderContract(contractId)       
+        res.json(objectPdf)
+        return objectPdf
 
     }
 
@@ -23,7 +25,8 @@ class ContractServices {
 
         const { body_html: htmlTemplate } = await this.supabase.queryBuilder('document_templates', 'document_id', documentId, ['body_html'])
         const htmlRender = await this.templateServices.renderByHtmlTemplate(htmlTemplate, customObject)
-        return await this.templateServices.createPDF(htmlRender)
+        const response = await this.templateServices.createPDF(htmlRender)
+        return response
     }
 
     

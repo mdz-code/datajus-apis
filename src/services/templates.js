@@ -46,9 +46,10 @@ class TemplateServices {
 
     async createPDF(html) {
         const file = { content: html }
-        const options = { format: 'A4' }
-
-        return await html_to_pdf.generatePdf(file, options)
+        const options = { format: 'A4' , encoding: false }
+        const response = await html_to_pdf.generatePdf(file, options)
+        const buffer = Buffer.from(response, 'base64')
+        return buffer
 
     }
 }

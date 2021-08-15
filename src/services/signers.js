@@ -21,7 +21,7 @@ class Signers {
 
         const { id } = await supabase.insertValue('signers', arrayInset)
         return {
-            signer_id: id
+            signerId: id
         }
 
     }

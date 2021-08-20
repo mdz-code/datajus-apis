@@ -11,7 +11,6 @@ module.exports = class Server {
 
     routes() {
         this.app.use(router)
-        
     }
 
     middlewares() {

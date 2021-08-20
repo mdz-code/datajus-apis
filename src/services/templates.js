@@ -50,7 +50,6 @@ class TemplateServices {
         const response = await html_to_pdf.generatePdf(file, options)
         const buffer = Buffer.from(response, 'base64')
         return buffer
-
     }
 }
 

@@ -27,6 +27,17 @@ class SupabaseModel {
     
         return {}
     }
+
+    async updateValue(table, matchObject, updateObject) {
+
+        const { data, error } = await this.supabase.from(table).update(updateObject).match(matchObject)
+
+        if (!error) {
+            return data[0]
+        }
+    
+        return {}
+    }
 }
 
 module.exports = new SupabaseModel()
